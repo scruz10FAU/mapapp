@@ -1,0 +1,1138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Panel Styles */
+.left-panel {
+    width: 400px;
+    background: white;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.panel-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    background: #2c5aa0;
+    color: white;
+}
+
+.panel-header h2 {
+    margin-bottom: 15px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.tab-btn {
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.tab-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.tab-btn.active {
+    background: white;
+    color: #2c5aa0;
+}
+
+.tab-content {
+    display: none;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.tab-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Search Section */
+.search-section {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.search-section input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.filter-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* Selection Controls */
+.selection-controls {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.selection-controls button {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.selection-controls button:hover {
+    background: #f5f5f5;
+}
+
+#export-selected {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+#export-selected:hover {
+    background: #218838;
+}
+
+/* Locations List */
+.locations-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.location-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.location-item:hover {
+    background-color: #f8f9fa;
+}
+
+.location-item.selected {
+    background-color: #e3f2fd;
+    border-left: 4px solid #2c5aa0;
+}
+
+.location-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.location-checkbox {
+    margin-top: 2px;
+}
+
+.location-title {
+    font-weight: bold;
+    color: #333;
+    flex: 1;
+}
+
+.confirmed-badge {
+    background: #28a745;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.location-address {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.location-description {
+    color: #888;
+    font-size: 13px;
+    line-height: 1.4;
+    max-height: 60px;
+    overflow: hidden;
+}
+
+/* Form Styles */
+#submit-form {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+#submit-form button {
+    width: 100%;
+    padding: 12px;
+    background: #2c5aa0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#submit-form button:hover {
+    background: #1e3d6f;
+}
+
+/* Map Styles */
+.map-container {
+    flex: 1;
+    position: relative;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.map-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.map-control-btn {
+    padding: 10px 15px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.map-control-btn:hover {
+    background: #f5f5f5;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Modal Styles - Replace existing modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow: auto; /* Allow scrolling of the modal backdrop */
+}
+
+.modal-content {
+    background-color: white;
+    margin: 2% auto;
+    padding: 20px;
+    padding-top: 50px; /* Space for close button */
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    max-height: 90vh; /* Maximum height */
+    overflow-y: auto; /* Scrollable content */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Custom scrollbar for modal */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1;
+    background: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.close:hover {
+    color: black;
+    background: #f0f0f0;
+}
+
+/* Modal body content */
+#modal-body {
+    padding-right: 10px; /* Space for scrollbar */
+}
+
+#modal-body h2 {
+    margin-top: 0;
+    padding-right: 40px; /* Space for close button */
+}
+
+#modal-body img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+    
+    .left-panel {
+        width: 100%;
+        height: 50vh;
+    }
+    
+    .map-container {
+        height: 50vh;
+    }
+    
+    .selection-controls {
+        flex-direction: column;
+    }
+    
+    .selection-controls button {
+        width: 100%;
+    }
+}
+
+/* Custom popup styles */
+.custom-popup .leaflet-popup-content {
+    margin: 8px 12px;
+}
+
+.popup-title {
+    font-weight: bold;
+    color: #2c5aa0;
+    margin-bottom: 8px;
+}
+
+.popup-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 8px 0;
+}
+
+.popup-description {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 8px 0;
+}
+
+.popup-website {
+    display: inline-block;
+    color: #2c5aa0;
+    text-decoration: none;
+    margin-top: 8px;
+}
+
+.popup-website:hover {
+    text-decoration: underline;
+}
+
+/* Directions Panel Styles - Replace existing */
+.directions-panel {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    width: 350px;
+    max-height: calc(100vh - 120px);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden; /* Prevent overflow */
+}
+
+.directions-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    max-height: calc(100vh - 220px); /* Ensure scrollable area */
+}
+
+/* Custom scrollbar for directions */
+.directions-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.directions-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.directions-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.directions-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.directions-panel.active {
+    display: flex;
+}
+
+.directions-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2c5aa0;
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.directions-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+}
+
+.directions-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.directions-form {
+    margin-bottom: 20px;
+}
+
+.directions-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.directions-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 10px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+#directions-result {
+    margin-top: 20px;
+}
+
+.route-summary {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.route-summary h4 {
+    margin: 0 0 10px 0;
+    color: #2c5aa0;
+}
+
+.route-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.route-info span {
+    color: #666;
+}
+
+.route-info strong {
+    color: #333;
+}
+
+.directions-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.directions-steps li {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.directions-steps li:last-child {
+    border-bottom: none;
+}
+
+.step-number {
+    background: #2c5aa0;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.step-instruction {
+    flex: 1;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.step-distance {
+    color: #666;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.external-directions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.external-directions a {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.external-directions a:hover {
+    background: #218838;
+}
+
+.directions-button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.directions-button:hover {
+    background: #218838;
+}
+
+/* Leaflet Routing Machine Customization */
+.leaflet-routing-container {
+    display: none; /* Hide default routing UI */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .directions-panel {
+        width: calc(100% - 40px);
+        max-height: 60vh;
+    }
+}
+
+/* Trip Planner Button */
+.trip-btn {
+    background: #ff6b6b;
+    color: white;
+    border-color: #ff6b6b;
+}
+
+.trip-btn:hover {
+    background: #ee5a52;
+}
+
+.trip-btn:disabled {
+    background: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Trip Panel Styles - Replace existing */
+.trip-panel {
+    position: absolute;
+    left: 20px;
+    top: 80px;
+    width: 400px;
+    max-height: calc(100vh - 120px);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden; /* Prevent overflow */
+}
+
+.trip-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+    max-height: calc(100vh - 220px); /* Ensure scrollable area */
+}
+
+/* Custom scrollbar for trip panel */
+.trip-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.trip-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.trip-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.trip-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Trip result container */
+#trip-result {
+    max-height: none; /* Allow full scrolling in parent */
+}
+
+.trip-leg-steps {
+    font-size: 13px;
+    color: #666;
+    padding-left: 42px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.trip-leg-steps::-webkit-scrollbar {
+    width: 4px;
+}
+
+.trip-leg-steps::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+.trip-leg-steps::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+}
+
+.trip-panel.active {
+    display: flex;
+}
+
+.trip-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ff6b6b;
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.trip-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.trip-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.trip-form {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.trip-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.trip-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.trip-options {
+    margin: 15px 0;
+}
+
+.trip-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.trip-options input[type="checkbox"] {
+    width: auto;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background: #ee5a52;
+}
+
+.btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Trip Stops List */
+.trip-stops {
+    margin-bottom: 20px;
+}
+
+.trip-stops h4 {
+    margin: 0 0 15px 0;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#stops-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.stop-item {
+    padding: 12px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: move;
+}
+
+.stop-item.dragging {
+    opacity: 0.5;
+}
+
+.stop-number {
+    background: #ff6b6b;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.stop-info {
+    flex: 1;
+}
+
+.stop-title {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.stop-address {
+    font-size: 12px;
+    color: #666;
+}
+
+.stop-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.stop-btn {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.stop-btn:hover {
+    background: #f8f9fa;
+}
+
+.stop-btn.remove {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.stop-btn.remove:hover {
+    background: #dc3545;
+    color: white;
+}
+
+/* Trip Summary */
+.trip-summary {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.trip-summary h4 {
+    margin: 0 0 15px 0;
+    color: #ff6b6b;
+}
+
+.trip-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.trip-stat {
+    text-align: center;
+    padding: 12px;
+    background: white;
+    border-radius: 4px;
+}
+
+.trip-stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6b6b;
+    display: block;
+}
+
+.trip-stat-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
+
+.trip-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.trip-actions button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.export-trip-btn {
+    background: #28a745;
+    color: white;
+}
+
+.export-trip-btn:hover {
+    background: #218838;
+}
+
+.print-trip-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.print-trip-btn:hover {
+    background: #5a6268;
+}
+
+/* Trip Directions */
+.trip-directions {
+    margin-top: 20px;
+}
+
+.trip-leg {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+}
+
+.trip-leg-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.trip-leg-icon {
+    background: #ff6b6b;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.trip-leg-info {
+    flex: 1;
+}
+
+.trip-leg-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.trip-leg-distance {
+    font-size: 12px;
+    color: #666;
+}
+
+.trip-leg-steps {
+    font-size: 13px;
+    color: #666;
+    padding-left: 42px;
+}
+
+/* External Trip Links */
+.external-trip-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.external-trip-links a {
+    padding: 12px;
+    text-align: center;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.external-trip-links a:hover {
+    background: #218838;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .trip-panel {
+        width: calc(100% - 40px);
+        max-height: 70vh;
+    }
+
+    .trip-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Leaflet Popup Scrollable Styles - Add at the end of your CSS */
+.leaflet-popup-content-wrapper {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.leaflet-popup-content {
+    margin: 8px 12px;
+    max-width: 300px;
+    max-height: 380px;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar for popups */
+.leaflet-popup-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.leaflet-popup-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.leaflet-popup-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.leaflet-popup-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Popup description max height */
+.popup-description {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 8px 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.popup-image {
+    max-width: 100%;
+    max-height: 200px;
+    height: auto;
+    border-radius: 4px;
+    margin: 8px 0;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Light Shows Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Add Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <div class="panel-header">
+                <h2>Christmas Light Shows</h2>
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="showTab('browse')">Browse</button>
+                    <button class="tab-btn" onclick="showTab('submit')">Submit</button>
+                </div>
+            </div>
+
+            <!-- Browse Tab -->
+            <div id="browse-tab" class="tab-content active">
+                <div class="search-section">
+                    <input type="text" id="search-input" placeholder="Search locations...">
+                    <div class="filter-options">
+                        <label>
+                            <input type="checkbox" id="confirmed-filter"> Confirmed 2025
+                        </label>
+                    </div>
+                </div>
+
+                <div class="selection-controls">
+                    <button id="select-all">Select All</button>
+                    <button id="clear-all">Clear All</button>
+                    <button id="export-selected">Export Selected</button>
+                </div>
+
+                <div id="locations-list" class="locations-list">
+                    <!-- Locations will be populated here -->
+                </div>
+            </div>
+
+            <!-- Submit Tab -->
+            <div id="submit-tab" class="tab-content">
+                <form id="submit-form">
+                    <div class="form-group">
+                        <label for="address">Address*:</label>
+                        <input type="text" id="address" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="title">Title*:</label>
+                        <input type="text" id="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea id="description" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="image-url">Image URL:</label>
+                        <input type="url" id="image-url">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="website-url">Website URL:</label>
+                        <input type="url" id="website-url">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="confirmed-2025"> Confirmed for 2025
+                        </label>
+                    </div>
+                    
+                    <button type="submit">Submit Location</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Map Container -->
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="map-controls">
+                <button id="show-selected" class="map-control-btn">Show Selected Only</button>
+                <button id="show-all" class="map-control-btn">Show All</button>
+                <button id="plan-trip" class="map-control-btn trip-btn">Plan Trip with Selected</button>
+                <button id="clear-route" class="map-control-btn" style="display: none;">Clear Route</button>
+            </div>
+             <!-- Directions Panel -->
+            <div id="directions-panel" class="directions-panel">
+                <div class="directions-header">
+                    <h3>Directions</h3>
+                    <button id="close-directions" class="close-btn">&times;</button>
+                </div>
+                <div class="directions-content">
+                    <div class="directions-form">
+                        <label for="start-location">Starting Location:</label>
+                        <input type="text" id="start-location" placeholder="Enter your address or use current location">
+                        <button id="use-current-location" class="btn-secondary">Use Current Location</button>
+                    </div>
+                    <div id="directions-result"></div>
+                </div>
+            </div>
+
+            <!-- Trip Planner Panel -->
+            <div id="trip-panel" class="trip-panel">
+                <div class="trip-header">
+                    <h3>Trip Planner</h3>
+                    <button id="close-trip" class="close-btn">&times;</button>
+                </div>
+                <div class="trip-content">
+                    <div class="trip-form">
+                        <label for="trip-start-location">Starting Location:</label>
+                        <input type="text" id="trip-start-location" placeholder="Enter your address or use current location">
+                        <button id="trip-use-current-location" class="btn-secondary">Use Current Location</button>
+                        
+                        <div class="trip-options">
+                            <label>
+                                <input type="checkbox" id="optimize-route" checked>
+                                Optimize route order
+                            </label>
+                            <label>
+                                <input type="checkbox" id="return-to-start">
+                                Return to starting point
+                            </label>
+                        </div>
+                        
+                        <button id="create-trip" class="btn-primary">Create Trip Route</button>
+                    </div>
+
+                    <div id="trip-stops" class="trip-stops">
+                        <h4>Trip Stops (<span id="stops-count">0</span>)</h4>
+                        <div id="stops-list"></div>
+                    </div>
+
+                    <div id="trip-result"></div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal for location details -->
+    <div id="location-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Add Leaflet Routing Machine JS -->
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
