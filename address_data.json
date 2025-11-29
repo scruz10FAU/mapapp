@@ -20,10 +20,10 @@
         "website_url": "",
         "confirmed_2025": true
     },
-    "4840 123rd trail ": {
+    "4840 123rd trail": {
         "title": "The acreage",
         "description": "",
-        "image_url": "placeholder.png",
+        "image_url": "",
         "website_url": "",
         "confirmed_2025": false
     },
@@ -31,8 +31,8 @@
         "title": "Whoville",
         "description": "THE GRINCH IS BACK IN TOWN </br>Come visit the GRINCH in Whooville and take your </br>holiday pics. Tunnel of lights, scavenger hunt and interact with the Grinch.</br>405 Las Palmas Street in La Mancha </br>Tonight Friday 7:30 - 9</br>Saturday 12/7  6:30 -930</br>Sunday 12/8 6:30 -9</br>",
         "image_url": "/static/images/whoville.jpg",
-        "website_url": null,
-        "confirmed_2025": false
+        "website_url": "https://www.facebook.com/profile.php?id=61583863263559",
+        "confirmed_2025": true
     },
     "14876 Stirrup Lane Wellington, FL, 33414": {
         "title": "Martino Family Lightshow",
@@ -60,7 +60,7 @@
         "description": "Come by and check us out!</br>910 South Patrick Circle</br>West Palm Beach</br>33406</br>",
         "image_url": "/static/images/kazenFamily.jpg",
         "website_url": "https://www.facebook.com/christmaslightdisplay/",
-        "confirmed_2025": false
+        "confirmed_2025": true
     },
     "Northlake Blvd & Seminole Pratt Whitney Rd, Florida, 33470": {
         "title": "The Grinch of Northlake",
@@ -87,14 +87,14 @@
         "title": "Heights of Jupiter",
         "description": "The Heights is a pizza slice shaped neighborhood of 1,500 single family ranch and two story homes in Jupiter, Florida. The official name is North Palm Beach Heights but most people just call it the Heights. The Heights is located off of Donald Ross Road and is between I-95 and Abacoa. The Heights neighborhood really loves Christmas and Florida Power and Light really loves the Heights. Every December the Heights shows their love of the holidays by decking out their homes with lights, inflatables, and all kinds of decorations. Some of the highlights are the lighted arches that stretch over the street and street nicknamed Candy Cane Lane because every house on the street is lined with colorful candy canes. My favorite decorations included the robotic arm sleigh flying the rooftop, tropical Santa taking a break from the Christmas madness by lounging out on his beach chair, the lighted flamingos which is so Florida, and all of the Star Wars inflatables because you can't confine Christmas to just this galaxy. Be sure not to miss Hollywood and Pompano Streets.",        "image_url": "/static/images/whovillerJup.jpg",
         "website_url": "https://www.yelp.com/biz/heights-of-jupiter-jupiter",
-        "confirmed_2025": false
+        "confirmed_2025": true
     },
     "6342 Ungerer St Jupiter, FL 33458": {
         "title": "Who-Ville Experience Jupiter",
         "description": "Who-ville Experience is a unique entertainment destination in Jupiter, FL that offers immersive and interactive experiences for visitors of all ages. With a focus on creativity and imagination, Who-ville Experience provides a whimsical environment where guests can explore, play, and make memories together.",
         "image_url": "/static/images/whovillerJup.jpg",
         "website_url": "https://www.yelp.com/biz/who-ville-experience-jupiter",
-        "confirmed_2025": false
+        "confirmed_2025": true
     },
     "110 Segovia Ave, royal palm beach, FL": {
         "title": "Lights on Segovia Ave",

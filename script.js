@@ -1470,9 +1470,19 @@ class ChristmasLightsApp {
             window.open(url, '_blank');
             this.copyToClipboard(url, 'Apple Maps link copied to clipboard!');
         } else {
-
-            const url = `https://maps.apple.com/?saddr=${encodeURIComponent(startLocation)}&daddr=${encodeURIComponent(this.tripStops[0].address)}`;
-            window.open(url, '_blank');
+        // Multiple destinations - use daddr with + separator
+        let url = `https://maps.apple.com/?saddr=${encodeURIComponent(startLocation)}`;
+        
+        // Apple Maps supports multiple destinations with "+" separator
+        const destinations = this.tripStops.map(stop => stop.address);
+        if (returnToStart) {
+            destinations.push(startLocation);
+        }
+        
+        url += '&daddr=' + destinations.map(addr => encodeURIComponent(addr)).join('+to:');
+        
+        window.open(url, '_blank');
+        this.copyToClipboard(url, 'Apple Maps link copied to clipboard!');
             
         }
     }
