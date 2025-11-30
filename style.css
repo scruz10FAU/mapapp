@@ -1174,7 +1174,7 @@ body {
     font-size: 14px;
     font-weight: bold;
     text-align: left;
-    display: flex;
+    display: none;
     align-items: center;
     gap: 8px;
     margin-bottom: 10px;
@@ -1193,6 +1193,14 @@ body {
     overflow: hidden;
 }
 
+/* Desktop - always show search content */
+@media (min-width: 769px) {
+    .search-content {
+        max-height: none !important;
+        opacity: 1 !important;
+    }
+}
+
 /* Mobile styles */
 @media (max-width: 768px) {
     .toggle-search-btn {
@@ -1200,13 +1208,14 @@ body {
     }
     
     .search-content.collapsed {
-        max-height: 0;
-        opacity: 0;
-        pointer-events: none;
+        max-height: 0 !important;
+        opacity: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
     .search-content.expanded {
-        max-height: 500px;
-        opacity: 1;
+        max-height: 500px !important;
+        opacity: 1 !important;
     }
 }
