@@ -20,7 +20,8 @@ class ChristmasLightsApp {
         setTimeout(() => {
             this.applyFilters();
             this.renderLocationsList();
-            this.updateTripButton();   
+            this.updateTripButton();
+            
         }, 100);
         this.addMarkersToMap();
         
