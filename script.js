@@ -19,6 +19,12 @@ class ChristmasLightsApp {
         await this.loadLocations();
         this.initMap();
         this.setupEventListeners();
+
+        // Collapse search on mobile by default
+        if (window.innerWidth <= 768) {
+            document.getElementById('search-content').classList.add('collapsed');
+            document.getElementById('toggle-icon').textContent = '▶';
+        }
         setTimeout(() => {
             this.applyFilters();
             this.renderLocationsList();
@@ -310,12 +316,31 @@ class ChristmasLightsApp {
             this.searchByRadius();
         });
 
+        document.getElementById('toggle-search').addEventListener('click', () => {
+            this.toggleSearchSection();
+        });
+
         window.addEventListener('click', (e) => {
             const modal = document.getElementById('location-modal');
             if (e.target === modal) {
                 modal.style.display = 'none';
             }
         });
+    }
+
+    toggleSearchSection() {
+        const content = document.getElementById('search-content');
+        const icon = document.getElementById('toggle-icon');
+        
+        if (content.classList.contains('collapsed')) {
+            content.classList.remove('collapsed');
+            content.classList.add('expanded');
+            icon.textContent = '▼';
+        } else {
+            content.classList.add('collapsed');
+            content.classList.remove('expanded');
+            icon.textContent = '▶';
+        }
     }
 
     async searchByRadius() {
