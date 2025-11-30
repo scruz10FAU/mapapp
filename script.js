@@ -9,6 +9,8 @@ class ChristmasLightsApp {
         this.userLocation = null;
         this.tripStops = [];
         this.tripRoute = null;
+        this.radiusCircle = null;
+        this.radiusCenterMarker = null;
         
         this.init();
     }
@@ -304,12 +306,120 @@ class ChristmasLightsApp {
             document.getElementById('location-modal').style.display = 'none';
         });
 
+        document.getElementById('search-radius-btn').addEventListener('click', () => {
+            this.searchByRadius();
+        });
+
         window.addEventListener('click', (e) => {
             const modal = document.getElementById('location-modal');
             if (e.target === modal) {
                 modal.style.display = 'none';
             }
         });
+    }
+
+    async searchByRadius() {
+        const searchAddress = document.getElementById('search-input').value;
+        const radius = parseFloat(document.getElementById('radius-input').value);
+        
+        if (!searchAddress || !radius) {
+            alert('Please enter both an address and radius.');
+            return;
+        }
+        
+        // Geocode the search address
+        const centerCoords = await this.geocodeAddress(searchAddress);
+        
+        if (!centerCoords) {
+            alert('Could not find the address. Please try again.');
+            return;
+        }
+        
+        // Filter locations within radius
+        const confirmedOnly = document.getElementById('confirmed-filter').checked;
+        this.filteredLocations = {};
+        
+        for (const [address, location] of Object.entries(this.locations)) {
+            const markerData = this.markers.find(m => m.address === address);
+            
+            if (markerData && markerData.coords) {
+                const distance = this.calculateDistance(
+                    centerCoords.lat,
+                    centerCoords.lng,
+                    markerData.coords.lat,
+                    markerData.coords.lng
+                );
+                
+                // Convert km to miles
+                const distanceMiles = distance * 0.621371;
+                
+                const withinRadius = distanceMiles <= radius;
+                const matchesConfirmed = !confirmedOnly || location.confirmed_2025;
+                
+                if (withinRadius && matchesConfirmed) {
+                    this.filteredLocations[address] = location;
+                }
+            }
+        }
+        
+        console.log(`Found ${Object.keys(this.filteredLocations).length} locations within ${radius} miles`);
+        this.renderLocationsList();
+        this.showFilteredOnMap();
+        
+        // Add a circle to show the search radius
+        this.showSearchRadius(centerCoords, radius);
+    }
+
+    showFilteredOnMap() {
+        // Hide all markers first
+        this.markers.forEach(({ marker }) => {
+            marker.remove();
+        });
+        
+        // Show only filtered markers
+        const filteredMarkers = [];
+        this.markers.forEach(({ marker, address }) => {
+            if (this.filteredLocations[address]) {
+                marker.addTo(this.map);
+                filteredMarkers.push(marker);
+            }
+        });
+        
+        if (filteredMarkers.length > 0) {
+            const group = L.featureGroup(filteredMarkers);
+            this.map.fitBounds(group.getBounds().pad(0.1));
+        }
+    }
+
+    showSearchRadius(center, radiusMiles) {
+        // Remove existing radius circle if any
+        if (this.radiusCircle) {
+            this.map.removeLayer(this.radiusCircle);
+        }
+        
+        // Convert miles to meters for Leaflet circle
+        const radiusMeters = radiusMiles * 1609.34;
+        
+        // Add circle to map
+        this.radiusCircle = L.circle([center.lat, center.lng], {
+            color: '#2c5aa0',
+            fillColor: '#2c5aa0',
+            fillOpacity: 0.1,
+            radius: radiusMeters
+        }).addTo(this.map);
+        
+        // Add center marker
+        if (this.radiusCenterMarker) {
+            this.map.removeLayer(this.radiusCenterMarker);
+        }
+        
+        this.radiusCenterMarker = L.marker([center.lat, center.lng], {
+            icon: L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background: #2c5aa0; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">📍</div>',
+                iconSize: [30, 30]
+            })
+        }).addTo(this.map).bindPopup(`Search Center<br>${radiusMiles} mile radius`);
     }
 
     filterLocations(searchTerm) {
