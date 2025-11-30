@@ -361,10 +361,22 @@ class ChristmasLightsApp {
                 }
             }
         }
+
+        // Clear selections that are not in filtered locations
+        const selectionsToRemove = [];
+        this.selectedLocations.forEach(address => {
+            if (!this.filteredLocations[address]) {
+                selectionsToRemove.push(address);
+            }
+        });
+        selectionsToRemove.forEach(address => {
+            this.selectedLocations.delete(address);
+        });
         
         console.log(`Found ${Object.keys(this.filteredLocations).length} locations within ${radius} miles`);
         this.renderLocationsList();
         this.showFilteredOnMap();
+        this.updateTripButton();
         
         // Add a circle to show the search radius
         this.showSearchRadius(centerCoords, radius);
@@ -440,6 +452,16 @@ class ChristmasLightsApp {
                 this.filteredLocations[address] = location;
             }
         }
+            // Clear selections that are not in filtered locations
+        const selectionsToRemove = [];
+        this.selectedLocations.forEach(address => {
+            if (!this.filteredLocations[address]) {
+                selectionsToRemove.push(address);
+            }
+        });
+        selectionsToRemove.forEach(address => {
+            this.selectedLocations.delete(address);
+        });
         console.log('Filter applied. Results:', Object.keys(this.filteredLocations).length);
         this.renderLocationsList();
     }
