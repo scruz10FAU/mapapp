@@ -387,6 +387,7 @@ class ChristmasLightsApp {
 
             item.addEventListener('click', (e) => {
                 if (e.target !== checkbox) {
+                    this.toggleSelection(address);
                     this.showLocationDetails(address, location);
                 }
             });
