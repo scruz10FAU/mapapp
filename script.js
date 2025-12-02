@@ -104,7 +104,7 @@ class ChristmasLightsApp {
                     "description": "The grinch directs traffic on Northlake Blvd and Seminole Pratt usually between 8-9PM nightly. Check his website to see if he is out!",
                     "image_url": "/static/images/grinch.jpg",
                     "website_url": "https://www.facebook.com/Grinchofnorthlake",
-                    "confirmed_2025": false
+                    "confirmed_2025": true
                 },
                 "11106 150th Ct N, Jupiter, FL 33478": {
                     "title": "Pig Farm Christmas Light Show",

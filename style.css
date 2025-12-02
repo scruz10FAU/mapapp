@@ -1219,3 +1219,47 @@ body {
         opacity: 1 !important;
     }
 }
+
+/* Hide detailed directions on mobile, keep summary and exports */
+@media (max-width: 768px) {
+    /* Hide turn-by-turn directions */
+    .directions-steps,
+    .trip-leg-steps,
+    .trip-directions {
+        display: none !important;
+    }
+    
+    /* Keep summary and action buttons visible */
+    .route-summary,
+    .trip-summary,
+    .external-directions,
+    .external-trip-links,
+    .trip-actions {
+        display: block !important;
+    }
+    
+    /* Make panels more compact on mobile */
+    .directions-panel,
+    .trip-panel {
+        max-height: 50vh;
+        top: 10px;
+    }
+    
+    .directions-content,
+    .trip-content {
+        max-height: calc(50vh - 60px);
+    }
+    
+    /* Adjust trip panel positioning */
+    .trip-panel {
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+    
+    .directions-panel {
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+}
