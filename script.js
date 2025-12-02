@@ -885,18 +885,20 @@ class ChristmasLightsApp {
     }
 
     clearRoute() {
+        
         if (this.routingControl) {
             this.map.removeControl(this.routingControl);
             this.routingControl = null;
         }
+            
         
         this.closeDirectionsPanel();
-        //document.getElementById('clear-route').style.display = 'none';
+        document.getElementById('clear-route').style.display = 'none';
     }
 
     closeDirectionsPanel() {
-        //document.getElementById('directions-panel').classList.remove('active');
-        //document.getElementById('directions-result').innerHTML = '';
+        document.getElementById('directions-panel').classList.remove('active');
+        document.getElementById('directions-result').innerHTML = '';
     }
 
     openTripPlanner() {
@@ -918,7 +920,7 @@ class ChristmasLightsApp {
     closeTripPanel() {
         document.getElementById('trip-panel').classList.remove('active');
         document.getElementById('trip-result').innerHTML = '';
-        this.clearRoute();
+        //this.clearRoute();
     }
 
     renderTripStops() {
