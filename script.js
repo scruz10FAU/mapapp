@@ -193,6 +193,19 @@ class ChristmasLightsApp {
                 const marker = L.marker([coords.lat, coords.lng]).addTo(this.map);
                 
                 const popupContent = this.createPopupContent(address, location);
+                
+
+                try {
+                    marker.on('click', (e) => {
+                        this.toggleSelection(address);
+                        this.renderTripStops();
+                        this.clearRoute();  
+                });
+                    console.log(`success on marker $marker`);
+                } catch (error) {
+                    console.error('Error adding click on marker:', error);
+
+                }
                 marker.bindPopup(popupContent, { 
                     className: 'custom-popup',
                     maxWidth: 300
@@ -225,7 +238,6 @@ class ChristmasLightsApp {
             ? '<span class="confirmed-badge">Confirmed 2025</span>' 
             : '';
             
-        toggleSelection(address)
         return `
             <div>
                 <div class="popup-title">${location.title} ${confirmedBadge}</div>
@@ -241,9 +253,11 @@ class ChristmasLightsApp {
     }
 
     setupEventListeners() {
+        /*
         document.getElementById('search-input').addEventListener('input', (e) => {
             this.filterLocations(e.target.value);
         });
+        */
 
         document.getElementById('confirmed-filter').addEventListener('change', () => {
             this.applyFilters();
@@ -339,7 +353,14 @@ class ChristmasLightsApp {
 
     async searchByRadius() {
         const searchAddress = document.getElementById('search-input').value;
-        const radius = parseFloat(document.getElementById('radius-input').value);
+        const radInput = document.getElementById('radius-input');
+        if (!radInput.value){
+            radInput.value = 5;
+        }
+        const radius = parseFloat(radInput.value);
+
+        //const radius = parseFloat(document.getElementById('radius-input').value);
+
         
         if (!searchAddress || !radius) {
             alert('Please enter both an address and radius.');
@@ -348,7 +369,7 @@ class ChristmasLightsApp {
         
         // Geocode the search address
         const centerCoords = await this.geocodeAddress(searchAddress);
-        
+        //const centerCoords = this.geocodeAddress(searchAddress);
         if (!centerCoords) {
             alert('Could not find the address. Please try again.');
             return;
@@ -482,6 +503,7 @@ class ChristmasLightsApp {
             this.selectedLocations.delete(address);
         });
         console.log('Filter applied. Results:', Object.keys(this.filteredLocations).length);
+        this.showFilteredOnMap();
         this.renderLocationsList();
     }
 
@@ -670,6 +692,8 @@ class ChristmasLightsApp {
             this.map.fitBounds(group.getBounds().pad(0.1));
         }
     }
+
+
 
     showAllOnMap() {
         this.markers.forEach(({ marker }) => {
@@ -909,6 +933,7 @@ class ChristmasLightsApp {
         document.getElementById('clear-route').style.display = 'none';
         document.getElementById('trip-result').innerHTML = '';
         document.getElementById('directions-result').innerHTML = '';
+        this.showFilteredOnMap();
     }
 
     closeDirectionsPanel() {
@@ -917,17 +942,10 @@ class ChristmasLightsApp {
     }
 
     openTripPlanner() {
-        if (this.selectedLocations.size < 2) {
-            alert('Please select at least 2 locations to plan a trip.');
+        if (this.selectedLocations.size < 1) {
+            alert('Please select at least 1 location to plan a trip.');
             return;
         }
-/*        
-        this.tripStops = Array.from(this.selectedLocations).map(address => ({
-            address,
-            location: this.locations[address]
-        }));
-
-*/
         const searchAddress = document.getElementById('search-input').value;
         const startInput = document.getElementById('trip-start-location');
         if (searchAddress && !startInput.value){
@@ -935,14 +953,12 @@ class ChristmasLightsApp {
         }
         this.renderTripStops();
         document.getElementById('trip-panel').classList.add('active');
-        //document.getElementById('stops-count').textContent = this.tripStops.length;
 
     }
 
     closeTripPanel() {
         document.getElementById('trip-panel').classList.remove('active');
-        //document.getElementById('trip-result').innerHTML = '';
-        //this.clearRoute();
+
     }
 
     renderTripStops() {
@@ -1127,6 +1143,7 @@ class ChristmasLightsApp {
             createButton.textContent = 'Create Trip Route';
             createButton.disabled = false;
         }
+        this.showSelectedOnMap();
     }
 
     optimizeRoute(start, stops) {
@@ -1254,6 +1271,7 @@ class ChristmasLightsApp {
             <div class="trip-summary">
                 <h4>Trip Summary</h4>
                 <div class="trip-stats">
+                    
                     <div class="trip-stat">
                         <span class="trip-stat-value">${this.tripStops.length}</span>
                         <span class="trip-stat-label">Stops</span>
@@ -1389,7 +1407,7 @@ class ChristmasLightsApp {
     }
 
     exportTripAsText(tripData) {
-        let text = '🎄 CHRISTMAS LIGHTS TOUR 🎄\n';
+        let text = 'CHRISTMAS LIGHTS TOUR\n';
         text += '='.repeat(50) + '\n\n';
         text += `Created: ${new Date(tripData.created).toLocaleString()}\n`;
         text += `Starting Location: ${tripData.startLocation}\n`;
@@ -1425,13 +1443,15 @@ class ChristmasLightsApp {
 
         alert('Trip exported as JSON and TXT files!');
     }
+    isMobileDevice() {
+        return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
 
     printTrip() {
         const tripContent = document.getElementById('trip-result').innerHTML;
         const startLocation = document.getElementById('trip-start-location').value || 'Current Location';
 
-        const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
+        const htmlContent = `
             <!DOCTYPE html>
             <html>
             <head>
@@ -1573,9 +1593,19 @@ class ChristmasLightsApp {
                         .stop-item { page-break-inside: avoid; }
                     }
                 </style>
+                <script>
+                    window.onload = function() {
+                        // Check if on desktop (width > 768px)
+                        if (window.innerWidth > 768) {
+                            setTimeout(function() {
+                                window.print();
+                            }, 500);
+                        }
+                    };
+                </script>
             </head>
             <body>
-                <h1>🎄 Christmas Lights Tour 🎄</h1>
+                <h1>Christmas Lights Tour</h1>
                 <p class="print-date">Generated: ${new Date().toLocaleString()}</p>
                 <p style="text-align: center;"><strong>Starting Location:</strong> ${startLocation}</p>
                 
@@ -1598,13 +1628,15 @@ class ChristmasLightsApp {
                 </div>
             </body>
             </html>
-        `);
+        `;
         
-        printWindow.document.close();
+        // Create blob and open in new window
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
         
-        setTimeout(() => {
-            printWindow.print();
-        }, 500);
+        // Clean up the blob URL after a delay
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
         // Export for Google Maps (opens directly in Google Maps with all waypoints)
     // Export for Google Maps (opens directly in Google Maps with all waypoints)

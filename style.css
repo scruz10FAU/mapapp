@@ -1227,28 +1227,33 @@ body {
     .trip-leg-steps,
     .trip-directions,
     .trip-stops,
+    .route-summary,
+    .trip-summary,
+    .external-directions,
+    .external-trip-links,
     .trip-stats {
         display: none !important;
     }
     
     /* Keep summary and action buttons visible */
-    .route-summary,
-    .trip-summary,
-    .external-directions,
-    .external-trip-links,
-    .trip-actions {
+    .trip-summary{
         display: block !important;
     }
-    
-    /* Make panels more compact on mobile */
-    /*
-    .directions-panel,
-    .trip-panel {
-        max-height: 50vh;
-        top: 10px;
+    .trip-actions {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
     }
     
+    .trip-actions button {
+        width: 100% !important;
+    }
+    /*
+    .trip-actions button {
+        width: 100% !important;
+    }
     */
+
     .directions-content {
         max-height: calc(50vh - 60px);
     }
