@@ -658,7 +658,7 @@ body {
 /* Trip Panel Styles - Replace existing */
 .trip-panel {
     position: absolute;
-    left: 20px;
+    left: 410px;
     top: 80px;
     width: 400px;
     max-height: calc(100vh - 120px);
@@ -1225,7 +1225,9 @@ body {
     /* Hide turn-by-turn directions */
     .directions-steps,
     .trip-leg-steps,
-    .trip-directions {
+    .trip-directions,
+    .trip-stops,
+    .trip-stats {
         display: none !important;
     }
     
@@ -1239,27 +1241,50 @@ body {
     }
     
     /* Make panels more compact on mobile */
+    /*
     .directions-panel,
     .trip-panel {
         max-height: 50vh;
         top: 10px;
     }
     
-    .directions-content,
-    .trip-content {
+    */
+    .directions-content {
         max-height: calc(50vh - 60px);
     }
+        
     
     /* Adjust trip panel positioning */
+    
     .trip-panel {
         left: 10px;
         right: 10px;
+        top: 10px;
         width: auto;
+        max-height: 100vh;
     }
     
     .directions-panel {
         left: 10px;
         right: 10px;
+        top: 10px;
         width: auto;
+    }
+    
+}
+
+/* Prevent zoom on input focus for mobile */
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+    
+    /* Keep buttons at normal size */
+    button {
+        font-size: 14px;
     }
 }

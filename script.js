@@ -224,7 +224,8 @@ class ChristmasLightsApp {
         const confirmedBadge = location.confirmed_2025 
             ? '<span class="confirmed-badge">Confirmed 2025</span>' 
             : '';
-
+            
+        toggleSelection(address)
         return `
             <div>
                 <div class="popup-title">${location.title} ${confirmedBadge}</div>
@@ -532,12 +533,16 @@ class ChristmasLightsApp {
             checkbox.addEventListener('change', (e) => {
                 e.stopPropagation();
                 this.toggleSelection(address);
+                this.renderTripStops();
+                this.clearRoute();
             });
 
             item.addEventListener('click', (e) => {
                 if (e.target !== checkbox) {
                     this.toggleSelection(address);
                     this.showLocationDetails(address, location);
+                    this.renderTripStops();
+                    this.clearRoute();
                 }
             });
 
@@ -574,12 +579,16 @@ class ChristmasLightsApp {
         const button = document.getElementById('plan-trip');
         const count = this.selectedLocations.size;
         
-        if (count < 2) {
+        if (count < 1) {
             button.disabled = true;
-            button.textContent = 'Plan Trip (Select 2+)';
+            button.textContent = 'Plan Trip (Select 1+)';
         } else {
             button.disabled = false;
+            if (count==1){
+                button.textContent = `Plan Trip with 1 Stop`;
+            } else {
             button.textContent = `Plan Trip with ${count} Stops`;
+            }
         }
     }
 
@@ -725,7 +734,11 @@ class ChristmasLightsApp {
         }
 
         const destination = markerData.coords;
+        const searchAddress = document.getElementById('search-input').value;
         const startInput = document.getElementById('start-location');
+        if (searchAddress && !startInput.value){
+            startInput.value = searchAddressAddr4ess.value;
+        }
         let startCoords = this.userLocation;
 
         if (startInput.value && !this.userLocation) {
@@ -894,11 +907,13 @@ class ChristmasLightsApp {
         
         this.closeDirectionsPanel();
         document.getElementById('clear-route').style.display = 'none';
+        document.getElementById('trip-result').innerHTML = '';
+        document.getElementById('directions-result').innerHTML = '';
     }
 
     closeDirectionsPanel() {
         document.getElementById('directions-panel').classList.remove('active');
-        document.getElementById('directions-result').innerHTML = '';
+        //document.getElementById('directions-result').innerHTML = '';
     }
 
     openTripPlanner() {
@@ -906,24 +921,35 @@ class ChristmasLightsApp {
             alert('Please select at least 2 locations to plan a trip.');
             return;
         }
-
+/*        
         this.tripStops = Array.from(this.selectedLocations).map(address => ({
             address,
             location: this.locations[address]
         }));
 
+*/
+        const searchAddress = document.getElementById('search-input').value;
+        const startInput = document.getElementById('trip-start-location');
+        if (searchAddress && !startInput.value){
+            startInput.value = searchAddress;
+        }
         this.renderTripStops();
         document.getElementById('trip-panel').classList.add('active');
-        document.getElementById('stops-count').textContent = this.tripStops.length;
+        //document.getElementById('stops-count').textContent = this.tripStops.length;
+
     }
 
     closeTripPanel() {
         document.getElementById('trip-panel').classList.remove('active');
-        document.getElementById('trip-result').innerHTML = '';
+        //document.getElementById('trip-result').innerHTML = '';
         //this.clearRoute();
     }
 
     renderTripStops() {
+        this.tripStops = Array.from(this.selectedLocations).map(address => ({
+            address,
+            location: this.locations[address]
+        }));
         const container = document.getElementById('stops-list');
         container.innerHTML = '';
 
@@ -972,6 +998,7 @@ class ChristmasLightsApp {
 
             container.appendChild(stopItem);
         });
+        document.getElementById('stops-count').textContent = this.tripStops.length;
     }
 
     removeStop(index) {
@@ -1026,7 +1053,11 @@ class ChristmasLightsApp {
     }
 
     async createTrip() {
+        const searchAddress = document.getElementById('search-input').value;
         const startInput = document.getElementById('trip-start-location');
+        if (searchAddress && !startInput.value){
+            startInput.value = searchAddress;
+        }
         const optimize = document.getElementById('optimize-route').checked;
         const returnToStart = document.getElementById('return-to-start').checked;
 
@@ -1253,9 +1284,8 @@ class ChristmasLightsApp {
                     <button class="export-trip-btn" style="background: #FBBC05; color: #333;" onclick="christmasLightsApp.exportAsGPX()">Export GPX</button>
                 </div>
             </div>
-
-            <h4>Trip Route:</h4>
             <div class="trip-directions">
+            <h4>Trip Route:</h4>
         `;
 
         let currentLeg = 0;
