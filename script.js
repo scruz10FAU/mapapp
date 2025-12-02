@@ -891,12 +891,12 @@ class ChristmasLightsApp {
         }
         
         this.closeDirectionsPanel();
-        document.getElementById('clear-route').style.display = 'none';
+        //document.getElementById('clear-route').style.display = 'none';
     }
 
     closeDirectionsPanel() {
-        document.getElementById('directions-panel').classList.remove('active');
-        document.getElementById('directions-result').innerHTML = '';
+        //document.getElementById('directions-panel').classList.remove('active');
+        //document.getElementById('directions-result').innerHTML = '';
     }
 
     openTripPlanner() {
