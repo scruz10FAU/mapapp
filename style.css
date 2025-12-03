@@ -1122,30 +1122,16 @@ body {
     
     .left-panel {
         width: 100%;
-        min-height: 40vh;
         max-height: 50vh;
+        height: auto;
     }
     
     .map-container {
         min-height: 50vh;
-        height: 50vh;
+        height: auto;
     }
-    
-    .selection-controls {
-        padding: 10px 15px;
-        gap: 8px;
-    }
-    
-    .selection-controls button {
-        font-size: 11px;
-        padding: 6px 10px;
-    }
-    
-    /* Ensure locations list is visible on mobile */
-    .locations-list {
-        min-height: 200px;
-        flex: 1;
-    }
+
+
     
     /* Make search section more compact on mobile */
     .search-section {
@@ -1231,8 +1217,20 @@ body {
     .trip-summary,
     .external-directions,
     .external-trip-links,
-    .trip-stats {
+    .trip-stats,
+    .selection-controls,
+    .leaflet-control-zoom,
+    .locations-list {
         display: none !important;
+    }
+    
+    .map-controls {
+        position: absolute;
+        left: 20px;
+        top: calc(100% - 150px);
+        right: 20px;
+        display: flex;
+        gap: 10px;
     }
     
     /* Keep summary and action buttons visible */
@@ -1274,6 +1272,10 @@ body {
         right: 10px;
         top: 10px;
         width: auto;
+    }
+
+    .popup-content-map {
+        z-index: 1000;
     }
     
 }

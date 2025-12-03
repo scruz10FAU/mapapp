@@ -182,37 +182,49 @@ class ChristmasLightsApp {
         let processed = 0;
         let valid = 0;
         
+        // Define marker icons
+        const selectedIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        const defaultIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+        
         for (const address of addresses) {
             const location = this.locations[address];
             const coords = await this.geocodeAddress(address);
             console.log(`Location ${address} coordinates ${Object.values(coords)}`);
             
-            
             if (coords) {
                 valid++;
-                const marker = L.marker([coords.lat, coords.lng]).addTo(this.map);
+                const marker = L.marker([coords.lat, coords.lng], { icon: defaultIcon }).addTo(this.map);
                 
                 const popupContent = this.createPopupContent(address, location);
-                
                 /*
-                try {
-                    marker.on('click', (e) => {
-                        this.toggleSelection(address);
-                        this.renderTripStops();
-                        this.clearRoute();  
-                });
-                    console.log(`success on marker $marker`);
-                } catch (error) {
-                    console.error('Error adding click on marker:', error);
-
-                }*/
                 marker.bindPopup(popupContent, { 
                     className: 'custom-popup',
                     maxWidth: 300
                 });
+                */
+
+                marker.on('click', (e) => {
+                    this.showLocationDetails(address, location);
+                });
                 
-                this.markers.push({ marker, address, location, coords });
+                this.markers.push({ marker, address, location, coords, defaultIcon, selectedIcon });
             }
+
             
             processed++;
             console.log(`Processed ${processed}/${addresses.length} locations`);
@@ -223,6 +235,16 @@ class ChristmasLightsApp {
             const group = L.featureGroup(this.markers.map(m => m.marker));
             this.map.fitBounds(group.getBounds().pad(0.1));
         }
+    }
+
+    updateMarkerColors() {
+        this.markers.forEach(({ marker, address, defaultIcon, selectedIcon }) => {
+            if (this.selectedLocations.has(address)) {
+                marker.setIcon(selectedIcon);
+            } else {
+                marker.setIcon(defaultIcon);
+            }
+        });
     }
 
     toggleSelectionFromMarker(address) {
@@ -247,20 +269,20 @@ class ChristmasLightsApp {
         const isSelected = this.selectedLocations.has(address);
         const checkboxHtml = `
         <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 10px;">
-            <input type="checkbox" ${isSelected ? 'checked' : ''} 
+            <input style="width: 30px; height: 30px;" type="checkbox" ${isSelected ? 'checked' : ''} 
                    onchange="christmasLightsApp.toggleSelectionFromMarker('${address.replace(/'/g, "\\'")}', this.checked)">
             <span>Add to trip</span>
         </label>
         `;
             
         return `
-            <div>
+            <div class="popup-content-map">
                 <div class="popup-title">${location.title} ${confirmedBadge}</div>
+                ${checkboxHtml}
                 <div><strong>${address}</strong></div>
                 ${imageHtml}
                 <div class="popup-description">${location.description.replace(/(<\/br>|<br>)/gi, '<br>')}</div>
                 ${websiteHtml}
-                ${checkboxHtml}
                 <button class="directions-button" onclick="christmasLightsApp.showDirections('${address.replace(/'/g, "\\'")}')">
                     Get Directions
                 </button>
@@ -294,16 +316,28 @@ class ChristmasLightsApp {
         */
        
         document.getElementById('show-selected').addEventListener('click', () => {
-            this.showSelectedOnMap();
+            if(this.isMobileDevice()){
+                this.selectAll();
+            } else {
+                this.showSelectedOnMap();
+            };
         });
 
         document.getElementById('show-all').addEventListener('click', () => {
-            if(this.isMobileDevice){
-                this.selectAll();
+            if(this.isMobileDevice()){
+                this.clearAll();
             } else {
-                this.showAllOnMap();
+                this.filterLocations('');
             }
         });
+
+        // Add this to update button text based on device
+        if (this.isMobileDevice()) {
+            document.getElementById('show-all').textContent = 'Clear All';
+        }
+        if (this.isMobileDevice()) {
+            document.getElementById('show-selected').textContent = 'Select All';
+        }
 
         document.getElementById('close-directions').addEventListener('click', () => {
             this.closeDirectionsPanel();
@@ -345,6 +379,11 @@ class ChristmasLightsApp {
         document.getElementById('search-radius-btn').addEventListener('click', () => {
             this.searchByRadius();
         });
+
+        document.getElementById('clear-radius-btn').addEventListener('click', () => {
+            this.clearRadius();
+        });
+
 
         document.getElementById('toggle-search').addEventListener('click', () => {
             this.toggleSearchSection();
@@ -437,14 +476,56 @@ class ChristmasLightsApp {
         
         console.log(`Found ${Object.keys(this.filteredLocations).length} locations within ${radius} miles`);
         this.renderLocationsList();
-        this.showFilteredOnMap();
+        // Calculate bounds that include the full radius
+        console.log('centerCoords:', centerCoords);
+        console.log('radius:', radius);
+        // Ensure centerCoords is [lat, lng] format
+        const lat = Array.isArray(centerCoords) ? centerCoords[0] : centerCoords.lat;
+        const lng = Array.isArray(centerCoords) ? centerCoords[1] : centerCoords.lng;
+        
+        // Convert radius (meters) to degrees
+        const latOffset = (radius*1000 / 111320); 
+        const lngOffset = (radius*1000 / 111320) / Math.cos(lat * Math.PI / 180);
+        
+        const bounds = L.latLngBounds(
+            [lat - latOffset, lng - lngOffset], // SW corner
+            [lat + latOffset, lng + lngOffset]  // NE corner
+        );
+        
+        this.map.fitBounds(bounds, {
+            padding: [50, 50]
+        });
+        this.showFilteredOnMap(false);
         this.updateTripButton();
         
         // Add a circle to show the search radius
         this.showSearchRadius(centerCoords, radius);
     }
+    getZoomLevel(radius) {
+        // Rough approximation: smaller radius = higher zoom
+        return Math.round(14 - Math.log(radius / 1000) / Math.LN2);
+    }
 
-    showFilteredOnMap() {
+    async clearRadius() {
+        const radInput = document.getElementById('radius-input');
+        radInput.value = '';
+        document.getElementById('search-input').value = '';
+        this.filterLocations('');
+        this.showFilteredOnMap();
+        this.updateTripButton();
+        
+        if (this.radiusCircle) {
+            this.map.removeLayer(this.radiusCircle);
+            this.radiusCircle = null;
+        }
+        
+        if (this.radiusCenterMarker) {
+            this.map.removeLayer(this.radiusCenterMarker);
+            this.radiusCenterMarker = null;
+        }
+    }
+
+    showFilteredOnMap(tozoom=true) {
         // Hide all markers first
         this.markers.forEach(({ marker }) => {
             marker.remove();
@@ -458,8 +539,7 @@ class ChristmasLightsApp {
                 filteredMarkers.push(marker);
             }
         });
-        
-        if (filteredMarkers.length > 0) {
+        if (filteredMarkers.length > 0 && tozoom) {
             const group = L.featureGroup(filteredMarkers);
             this.map.fitBounds(group.getBounds().pad(0.1));
         }
@@ -529,6 +609,8 @@ class ChristmasLightsApp {
         this.renderLocationsList();
     }
 
+
+
     applyFilters() {
         const searchTerm = document.getElementById('search-input').value;
         this.filterLocations(searchTerm);
@@ -565,7 +647,7 @@ class ChristmasLightsApp {
 
             item.innerHTML = `
                 <div class="location-header">
-                    <input type="checkbox" class="location-checkbox" ${this.selectedLocations.has(address) ? 'checked' : ''}>
+                    <input type="checkbox" style="width: 30px; height: 30px;" class="location-checkbox" ${this.selectedLocations.has(address) ? 'checked' : ''}>
                     <div class="location-title">${location.title}</div>
                     ${confirmedBadge}
                 </div>
@@ -583,10 +665,10 @@ class ChristmasLightsApp {
 
             item.addEventListener('click', (e) => {
                 if (e.target !== checkbox) {
-                    this.toggleSelection(address);
+                    //this.toggleSelection(address);
                     this.showLocationDetails(address, location);
-                    this.renderTripStops();
-                    this.clearRoute();
+                    //this.renderTripStops();
+                    //this.clearRoute();
                 }
             });
 
@@ -603,6 +685,7 @@ class ChristmasLightsApp {
         }
         this.renderLocationsList();
         this.updateTripButton();
+        this.updateMarkerColors();
     }
 
     selectAll() {
@@ -611,12 +694,14 @@ class ChristmasLightsApp {
         }
         this.renderLocationsList();
         this.updateTripButton();
+        this.updateMarkerColors();
     }
 
     clearAll() {
         this.selectedLocations.clear();
         this.renderLocationsList();
         this.updateTripButton();
+        this.updateMarkerColors();
     }
 
     updateTripButton() {
@@ -744,8 +829,18 @@ class ChristmasLightsApp {
             ? '<span class="confirmed-badge" style="display: inline-block; margin-left: 10px;">Confirmed 2025</span>' 
             : '';
 
+        const isSelected = this.selectedLocations.has(address);
+        const checkboxHtml = `
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 10px;">
+                <input style="width: 30px; height: 30px;" type="checkbox" ${isSelected ? 'checked' : ''} 
+                    onchange="christmasLightsApp.toggleSelectionFromMarker('${address.replace(/'/g, "\\'")}', this.checked)">
+                <span>Add to trip</span>
+            </label>
+            `;
+
         modalBody.innerHTML = `
             <h2>${location.title} ${confirmedBadge}</h2>
+            ${checkboxHtml}
             <p><strong>Address:</strong> ${address}</p>
             ${imageHtml}
             <div style="line-height: 1.6;">
@@ -1319,10 +1414,7 @@ class ChristmasLightsApp {
                     <button class="export-trip-btn" style="background: #4285F4;" onclick="christmasLightsApp.exportForGoogleMaps()">📍 Google Maps</button>
                     <button class="export-trip-btn" style="background: #007AFF;" onclick="christmasLightsApp.exportForAppleMaps()">🍎 Apple Maps</button>
                 </div>
-                <div class="trip-actions" style="margin-top: 10px;">
-                    <button class="export-trip-btn" style="background: #34A853;" onclick="christmasLightsApp.exportAsKML()">Export KML</button>
-                    <button class="export-trip-btn" style="background: #FBBC05; color: #333;" onclick="christmasLightsApp.exportAsGPX()">Export GPX</button>
-                </div>
+
             </div>
             <div class="trip-directions">
             <h4>Trip Route:</h4>
