@@ -283,9 +283,7 @@ class ChristmasLightsApp {
                 ${imageHtml}
                 <div class="popup-description">${location.description.replace(/(<\/br>|<br>)/gi, '<br>')}</div>
                 ${websiteHtml}
-                <button class="directions-button" onclick="christmasLightsApp.showDirections('${address.replace(/'/g, "\\'")}')">
-                    Get Directions
-                </button>
+
             </div>
         `;
     }
@@ -847,17 +845,7 @@ class ChristmasLightsApp {
                 ${location.description.replace(/(<\/br>|<br>)/gi, '<br>')}
             </div>
             ${websiteHtml}
-            <button class="directions-button" onclick="christmasLightsApp.showDirections('${address.replace(/'/g, "\\'")}')">
-                Get Directions
-            </button>
-            <div class="external-directions">
-                <a href="https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}" target="_blank">
-                    Open in Google Maps
-                </a>
-                <a href="https://maps.apple.com/?daddr=${encodeURIComponent(address)}" target="_blank">
-                    Open in Apple Maps
-                </a>
-            </div>
+
         `;
 
         modal.style.display = 'block';
