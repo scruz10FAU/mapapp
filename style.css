@@ -27,7 +27,7 @@ body {
 .panel-header {
     padding: 20px;
     border-bottom: 1px solid #eee;
-    background: #2c5aa0;
+    background: #155309;
     color: white;
 }
 
@@ -56,7 +56,7 @@ body {
 
 .tab-btn.active {
     background: white;
-    color: #2c5aa0;
+    color: #155309;
 }
 
 .tab-content {
@@ -143,7 +143,7 @@ body {
 
 .location-item.selected {
     background-color: #e3f2fd;
-    border-left: 4px solid #2c5aa0;
+    border-left: 4px solid #155309;
 }
 
 .location-header {
@@ -219,7 +219,7 @@ body {
 #submit-form button {
     width: 100%;
     padding: 12px;
-    background: #2c5aa0;
+    background: #155309;
     color: white;
     border: none;
     border-radius: 4px;
@@ -229,7 +229,7 @@ body {
 }
 
 #submit-form button:hover {
-    background: #1e3d6f;
+    background: #12420e;
 }
 
 /* Map Styles */
@@ -362,7 +362,7 @@ body {
 
 .popup-title {
     font-weight: bold;
-    color: #2c5aa0;
+    color: #155309;
     margin-bottom: 8px;
 }
 
@@ -381,7 +381,7 @@ body {
 
 .popup-website {
     display: inline-block;
-    color: #2c5aa0;
+    color: #155309;
     text-decoration: none;
     margin-top: 8px;
 }
@@ -442,7 +442,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #2c5aa0;
+    background: #155309;
     color: white;
     border-radius: 8px 8px 0 0;
 }
@@ -524,7 +524,7 @@ body {
 
 .route-summary h4 {
     margin: 0 0 10px 0;
-    color: #2c5aa0;
+    color: #155309;
 }
 
 .route-info {
@@ -560,7 +560,7 @@ body {
 }
 
 .step-number {
-    background: #2c5aa0;
+    background: #155309;
     color: white;
     width: 24px;
     height: 24px;
@@ -630,13 +630,7 @@ body {
     display: none; /* Hide default routing UI */
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .directions-panel {
-        width: calc(100% - 40px);
-        max-height: 60vh;
-    }
-}
+
 
 /* Trip Planner Button */
 .trip-btn {
@@ -1053,18 +1047,6 @@ body {
     background: #218838;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .trip-panel {
-        width: calc(100% - 40px);
-        max-height: 70vh;
-    }
-
-    .trip-stats {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* Leaflet Popup Scrollable Styles - Add at the end of your CSS */
 .leaflet-popup-content-wrapper {
     max-height: 400px;
@@ -1114,45 +1096,11 @@ body {
     margin: 8px 0;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .app-container {
-        flex-direction: column;
-    }
-    
-    .left-panel {
-        width: 100%;
-        max-height: 50vh;
-        height: auto;
-    }
-    
-    .map-container {
-        min-height: 50vh;
-        height: auto;
-    }
-
-
-    
-    /* Make search section more compact on mobile */
-    .search-section {
-        padding: 15px;
-    }
-    
-    .panel-header {
-        padding: 15px;
-    }
-    
-    .panel-header h2 {
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-}
-
 /* Toggle Search Button - only visible on mobile */
 .toggle-search-btn {
     width: 100%;
     padding: 12px;
-    background: #2c5aa0;
+    background: #155309;
     color: white;
     border: none;
     border-radius: 4px;
@@ -1167,7 +1115,7 @@ body {
 }
 
 .toggle-search-btn:hover {
-    background: #1e3d6f;
+    background: #184b13;
 }
 
 #toggle-icon {
@@ -1187,8 +1135,53 @@ body {
     }
 }
 
-/* Mobile styles */
+
+
+/* Hide detailed directions on mobile, keep summary and exports */
 @media (max-width: 768px) {
+    .directions-panel {
+        width: calc(100% - 40px);
+        max-height: 60vh;
+    }
+    
+    .trip-panel {
+        width: calc(100% - 40px);
+        max-height: 70vh;
+    }
+
+    .trip-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .app-container {
+        flex-direction: column;
+    }
+    
+    .left-panel {
+        width: 100%;
+        max-height: 50vh;
+        height: auto;
+    }
+    
+    .map-container {
+        min-height: 50vh;
+        height: auto;
+    }
+    
+    /* Make search section more compact on mobile */
+    .search-section {
+        padding: 15px;
+    }
+    
+    .panel-header {
+        padding: 15px;
+    }
+    
+    .panel-header h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
     .toggle-search-btn {
         display: flex !important;
     }
@@ -1204,10 +1197,7 @@ body {
         max-height: 500px !important;
         opacity: 1 !important;
     }
-}
 
-/* Hide detailed directions on mobile, keep summary and exports */
-@media (max-width: 768px) {
     /* Hide turn-by-turn directions */
     .directions-steps,
     .trip-leg-steps,
@@ -1278,10 +1268,6 @@ body {
         z-index: 1000;
     }
     
-}
-
-/* Prevent zoom on input focus for mobile */
-@media (max-width: 768px) {
     input[type="text"],
     input[type="number"],
     input[type="url"],
@@ -1295,3 +1281,4 @@ body {
         font-size: 14px;
     }
 }
+

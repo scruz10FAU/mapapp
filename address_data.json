@@ -1,10 +1,10 @@
 {
     "16327 70th St N, Loxahatchee, FL 33470": {
-        "title": "Arancibia Household",
-        "description": "Our first show will be this Friday December 6th at 7:00 pm</br>Show Days:</br>Friday 7:00 pm</br>Saturday 6:30 pm and 8:00 pm</br>Sunday 7:00 pm</br>We hope you enjoy this show made with lots of love for our friends and neighbors!</br>Happy Holidays to everyone and thank you!\u2764\ufe0f</br>",
-        "image_url": "./static/images/ArancibiaHouse.jpg",
+        "title": "Mega Christmas Lights Show",
+        "description": "We invite you to our Mega Christmas Lights Show! 🎅🏼🎄☃️ </br> Show Days: </br>Our first show will be on </br> • Saturday December 6 at 7:00pm and 8:30pm </br>Second show will be on </br> • Sunday December 7 at 7:00pm </br> Then the shows will be every weekend until January 4, 2026 </br> • Friday 7:00pm </br> • Saturday 7:00pm and 8:30pm </br> • Sunday 7:00pm </br>We hope you enjoy this show made with lots of love for our friends, neighbors and everyone ❤️</br>Happy Holidays to everyone and thank you!❤️",
+        "image_url": "./static/images/megaXmas.jpeg",
         "website_url": "https://www.facebook.com/viviana.b.gonella/videos/931308408949650",
-        "confirmed_2025": false
+        "confirmed_2025": true
     },
     "12401 80th Lane N": {
         "title": "12401 80th Lane N",
@@ -43,7 +43,7 @@
     },
     "2414 Gabriel Ln, West Palm Beach, FL 33406": {
         "title": "Gabriel Lane - The Christmas Street",
-        "description": "Tune to 88.7 FM Lights and music on at 6:30 pm Off at 10pm Friday and Saturday. Off at 9 pm Sunday through Thursday.",
+        "description": "Gabriel Lane is a festive destination in West Palm Beach, FL, known for its enchanting Christmas decorations and holiday spirit. This charming street offers visitors a magical experience with its dazzling light displays and seasonal festivities, creating a joyful atmosphere for all who visit.",
         "image_url": "./static/images/gabrielLane.jpg",
         "website_url": "https://foursquare.com/v/gabriel-lane--the-christmas-street/4c439ccedd1f2d7f28cc7ef9",
         "confirmed_2025": true
