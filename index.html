@@ -14,11 +14,12 @@
         <!-- Left Panel -->
         <div class="left-panel">
             <div class="panel-header">
-                <h2>Christmas Light Shows</h2>
-                <div class="tabs">
-                    <button class="tab-btn active" onclick="showTab('browse')">Browse</button>
-                    <button class="tab-btn" onclick="window.open('https://form.jotform.com/253326677415058?fbclid=IwY2xjawOcObhleHRuA2FlbQIxMABicmlkETFtQ2FPVkdQSmhoclRFNnYzc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHgKu0bLeHVLFvozdX8cB8omSpjIrjUbmKJLAwxjf0pnZimq7Kb1LZzt5ig8t_aem_5i_4a5m9-CoO3ZzSOn9wNQ', '_blank');">Submit</button>
-                    <label>
+                <h2 style="display: inline-block; margin-right: 10px;">Christmas Light Shows</h2>
+                <button class="tab-btn" style="display: inline-block;" onclick="window.open('https://form.jotform.com/253326677415058?fbclid=IwY2xjawOcObhleHRuA2FlbQIxMABicmlkETFtQ2FPVkdQSmhoclRFNnYzc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHgKu0bLeHVLFvozdX8cB8omSpjIrjUbmKJLAwxjf0pnZimq7Kb1LZzt5ig8t_aem_5i_4a5m9-CoO3ZzSOn9wNQ', '_blank');">Submit</button>
+
+                <div class="tabs" hidden>
+                    <button class="tab-btn active" onclick="showTab('browse')" hidden>Browse</button>
+                    <label hidden>
                         <input type="checkbox" id="confirmed-filter" checked> Confirmed 2025
                     </label>
                 </div>
@@ -42,7 +43,7 @@
                 <div class="selection-controls">
                     <button id="select-all">Select All</button>
                     <button id="clear-all">Clear All</button>
-                    <button id="export-selected">Export Selected</button>
+                    <!--<button id="export-selected">Export Selected</button>-->
                 </div>
 
                 <div id="locations-list" class="locations-list">

@@ -194,7 +194,7 @@ class ChristmasLightsApp {
                 
                 const popupContent = this.createPopupContent(address, location);
                 
-
+                /*
                 try {
                     marker.on('click', (e) => {
                         this.toggleSelection(address);
@@ -205,7 +205,7 @@ class ChristmasLightsApp {
                 } catch (error) {
                     console.error('Error adding click on marker:', error);
 
-                }
+                }*/
                 marker.bindPopup(popupContent, { 
                     className: 'custom-popup',
                     maxWidth: 300
@@ -225,6 +225,12 @@ class ChristmasLightsApp {
         }
     }
 
+    toggleSelectionFromMarker(address) {
+        this.toggleSelection(address)
+        this.renderLocationsList();
+        this.updateTripButton();
+    }
+
     createPopupContent(address, location) {
         const imageHtml = location.image_url && location.image_url !== 'placeholder.png' 
             ? `<img src="${location.image_url}" alt="${location.title}" class="popup-image" style="max-width: 100%; height: auto;">` 
@@ -237,6 +243,15 @@ class ChristmasLightsApp {
         const confirmedBadge = location.confirmed_2025 
             ? '<span class="confirmed-badge">Confirmed 2025</span>' 
             : '';
+
+        const isSelected = this.selectedLocations.has(address);
+        const checkboxHtml = `
+        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 10px;">
+            <input type="checkbox" ${isSelected ? 'checked' : ''} 
+                   onchange="christmasLightsApp.toggleSelectionFromMarker('${address.replace(/'/g, "\\'")}', this.checked)">
+            <span>Add to trip</span>
+        </label>
+        `;
             
         return `
             <div>
@@ -245,6 +260,7 @@ class ChristmasLightsApp {
                 ${imageHtml}
                 <div class="popup-description">${location.description.replace(/(<\/br>|<br>)/gi, '<br>')}</div>
                 ${websiteHtml}
+                ${checkboxHtml}
                 <button class="directions-button" onclick="christmasLightsApp.showDirections('${address.replace(/'/g, "\\'")}')">
                     Get Directions
                 </button>
@@ -271,16 +287,22 @@ class ChristmasLightsApp {
             this.clearAll();
         });
 
+        /*
         document.getElementById('export-selected').addEventListener('click', () => {
             this.exportSelected();
         });
-
+        */
+       
         document.getElementById('show-selected').addEventListener('click', () => {
             this.showSelectedOnMap();
         });
 
         document.getElementById('show-all').addEventListener('click', () => {
-            this.showAllOnMap();
+            if(this.isMobileDevice){
+                this.selectAll();
+            } else {
+                this.showAllOnMap();
+            }
         });
 
         document.getElementById('close-directions').addEventListener('click', () => {
