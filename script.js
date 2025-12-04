@@ -1780,6 +1780,10 @@ class ChristmasLightsApp {
             alert('Please add stops to your trip first!');
             return;
         }
+
+        if (!this.isMobileDevice()){
+            alert('Multiple trip stops do not export correctly into Apple maps unless on a cell phone. Only the first stop will be exported. The full map link is copied to your clipboard to use on a cellular device.');
+        }
         
         if (this.tripStops.length === 1) {
             // Single destination - this works perfectly

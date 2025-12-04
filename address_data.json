@@ -4,96 +4,126 @@
         "description": "We invite you to our Mega Christmas Lights Show! 🎅🏼🎄☃️ </br> Show Days: </br>Our first show will be on </br> • Saturday December 6 at 7:00pm and 8:30pm </br>Second show will be on </br> • Sunday December 7 at 7:00pm </br> Then the shows will be every weekend until January 4, 2026 </br> • Friday 7:00pm </br> • Saturday 7:00pm and 8:30pm </br> • Sunday 7:00pm </br>We hope you enjoy this show made with lots of love for our friends, neighbors and everyone ❤️</br>Happy Holidays to everyone and thank you!❤️",
         "image_url": "./static/images/megaXmas.jpeg",
         "website_url": "https://www.facebook.com/viviana.b.gonella/videos/931308408949650",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "12401 80th Lane N": {
         "title": "12401 80th Lane N",
         "description": "",
         "image_url": "./static/images/lightshow1.jpg",
         "website_url": "",
-        "confirmed_2025": false
+        "confirmed_2025": false,
+        "confirmed_2024": true
     },
     "12218 54th St N, West Palm Beach, FL 33411": {
         "title": "A Miracle on 54th St",
-        "description": "Tune to 88.7 FM Lights and music on at 6:30 pm Off at 10pm Friday and Saturday. Off at 9 pm Sunday through Thursday.",
+        "description": "Happy Holidays!</br>We are ready at A Miracle on 54th Street.</br>Hours are Sunday to Thursday 6:30 to 9:00 pm</br>Friday and Saturday 6:30 to 10:00 pm.</br>Tune your radio to 88.7 FM</br>Please feel welcome to walk in to see the Christmas village in our barn.</br>We ask to please not touch any of the displays or walk through them as there are many extension cords around them. Just follow the path please.",
         "image_url": "./static/images/Hammerle.png",
         "website_url": "",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "4840 123rd trail": {
         "title": "The acreage",
         "description": "",
         "image_url": "",
         "website_url": "",
-        "confirmed_2025": false
+        "confirmed_2025": false,
+        "confirmed_2024": true
     },
     "405 Las Palmas St, Royal Palm Beach, FL 33411": {
         "title": "Whoville",
         "description": "THE GRINCH IS BACK IN TOWN </br>Come visit the GRINCH in Whooville and take your </br>holiday pics. Tunnel of lights, scavenger hunt and interact with the Grinch.</br>405 Las Palmas Street in La Mancha </br>Tonight Friday 7:30 - 9</br>Saturday 12/7  6:30 -930</br>Sunday 12/8 6:30 -9</br>",
         "image_url": "https://targadev.com/lightshow2025/static/images/whoville.jpg",
         "website_url": "https://www.facebook.com/profile.php?id=61583863263559",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "14876 Stirrup Lane Wellington, FL, 33414": {
         "title": "Martino Family Lightshow",
         "description": "The Martino Family Christmas Lights in Wellington Florida. Our family has been putting up our display for over 40 years here in South Florida starting down in Miramar in the early 70's. We have thousands of computerized lights as well as original displays that we have had in our family for generations.<br>If you are here in South Florida we invite you, your family and friends to stop by, say hello and enjoy our display as well as our neighbors displays.<br>Make sure to tag Martino Family Christmas Lights! \ud83c\udf84<br>We are located in Paddock Park 1 at 14876 Stirrup Lane, Wellington FL 33414. Our display will be up through January 1st from 6PM - 11PM nightly.<br>Have a Safe, Healthy and Happy Holiday Season.<br>Merry Christmas,<br>The Martino Family",
         "image_url": "./static/images/martino.jpg",
         "website_url": "https://www.facebook.com/MartinoFamilyChristmasLights/",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "2414 Gabriel Ln, West Palm Beach, FL 33406": {
         "title": "Gabriel Lane - The Christmas Street",
         "description": "Gabriel Lane is a festive destination in West Palm Beach, FL, known for its enchanting Christmas decorations and holiday spirit. This charming street offers visitors a magical experience with its dazzling light displays and seasonal festivities, creating a joyful atmosphere for all who visit.",
         "image_url": "./static/images/gabrielLane.jpg",
         "website_url": "https://foursquare.com/v/gabriel-lane--the-christmas-street/4c439ccedd1f2d7f28cc7ef9",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "910 South Patrick Circle, West Palm Beach, 33406": {
         "title": "Kazen's Christmas Light Display",
         "description": "Come by and check us out!</br>910 South Patrick Circle</br>West Palm Beach</br>33406</br>",
         "image_url": "./static/images/kazenFamily.jpg",
         "website_url": "https://www.facebook.com/christmaslightdisplay/",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "Northlake Blvd & Seminole Pratt Whitney Rd, Florida, 33470": {
         "title": "The Grinch of Northlake",
         "description": "The grinch directs traffic on Northlake Blvd and Seminole Pratt usually between 8-9PM nightly. Check his website to see if he is out!",
         "image_url": "./static/images/grinch.jpg",
         "website_url": "https://www.facebook.com/Grinchofnorthlake",
-        "confirmed_2025": false
+        "confirmed_2025": false,
+        "confirmed_2024": true
     },
     "11106 150th Ct N, Jupiter, FL 33478": {
         "title": "Pig Farm Christmas Light Show",
         "description": "The show is on a loop. Tune to 97.1 FM or listen on outdoor speakers. I start up the show at 5:30pm it runs through all the song sequences in the loop and starts over again throughout the whole time. It runs this loop until 9:30pm, 10pm if someone is still watching the show.",
         "image_url": "./static/images/pigFarm.jpg",
         "website_url": "https://www.facebook.com/pigfarmlightshow/",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "15944 84th Ave N, Palm Beach Gardens Palm Beach Gardens, FL 33418": {
         "title": "Country Roads Christmas Light Show",
         "description": "\ud83c\udf84\ud83c\udf85\ud83c\udffb It\u2019s finally time! We are<br> LIVE from 11/27 until 12/31. Here is a very helpful FAQ:<br>\ud83d\udc9a DAILY shows at promptly 6:30, 7:30, <br>8:30pm. They last for approx. 20min each.<br>\u2764\ufe0f We are located at 15944 84th Ave <br>North in Palm Beach Gardens.<br>\ud83d\udc9a Each show is different! We rotate <br>50 different songs among the different times <br>(some Christmas, some not). <br>It \u201csnows\u201d following EVERY show along <br>the 159th (dirt road side).<br>\u2764\ufe0f Bring your child\u2019s letter to Santa to <br>put in the mailbox! We have a mailbox <br>out on the dirt road side (159th) <br>by the gate. Feel free to put your letters <br>in there and we will make sure Santa gets them!<br>\ud83d\udc9a This is not a walk-thru type of display. <br>We recommend parking on the side of the road, viewing from the fence <br>or tuning your car radio to 100.9FM. We recommend <br>arriving a little early to secure a spot.<br>\u2764\ufe0f The best spot to view the show is on the dirt <br>road side (159th). It\u2019s the best angle. Park and get out! <br>PLEASE WATCH THE DRAINAGE AREAS THAT ARE FENCED OFF!<br>\ud83d\udc9a If it is pouring down rain, we may not have shows <br>in order to protect our equipment. We will post if this happens.<br>\u2764\ufe0f Santa, food trucks & the Grinch visit a few times <br>before Christmas. We will post 24 hours before any events are planned!<br>\ud83d\udc9a We have some really awesome neighbors. They are <br>amazing and supportive, so please be courteous to our property <br>and our neighbors so we can keep this going each year! <br>Please don\u2019t leave any garbage on the ground, and do not <br>block anyone's driveway.<br>Merry Christmas!! \ud83c\udf85\ud83c\udffb. Key dates: ❤️ Saturday, November 29 - hot chocolate stand, Nanas Pumpkin Bread and our first night of the Little Smiles, Inc. toy drive! (Please bring a new unwrapped toy to put in the donation box) <br>Friday, December 5 - Santa’s arrival night! Meat in the Middle Food Truck   and The Scoop Coop will be on site alongside SANTA. Toy drive will be open. <br> Saturday, December 13 - hot chocolate stand and last night of the toy drive in the igloo.<br>Friday, December 19 - Meat In The Middle & The Scoop Coop on site with SANTA 🎅🏻 <br>~ Kristen & Sean ~<br>Sponsored by Curly Tail Screen & Window, LLC",
         "image_url": "./static/images/country_roads.jpg",
         "website_url": "https://www.facebook.com/countryroadslights",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "Heights Blvd, Jupiter, FL 33458": {
         "title": "Heights of Jupiter",
         "description": "The Heights is a pizza slice shaped neighborhood of 1,500 single family ranch and two story homes in Jupiter, Florida. The official name is North Palm Beach Heights but most people just call it the Heights. The Heights is located off of Donald Ross Road and is between I-95 and Abacoa. The Heights neighborhood really loves Christmas and Florida Power and Light really loves the Heights. Every December the Heights shows their love of the holidays by decking out their homes with lights, inflatables, and all kinds of decorations. Some of the highlights are the lighted arches that stretch over the street and street nicknamed Candy Cane Lane because every house on the street is lined with colorful candy canes. My favorite decorations included the robotic arm sleigh flying the rooftop, tropical Santa taking a break from the Christmas madness by lounging out on his beach chair, the lighted flamingos which is so Florida, and all of the Star Wars inflatables because you can't confine Christmas to just this galaxy. Be sure not to miss Hollywood and Pompano Streets.",        "image_url": "./static/images/whovillerJup.jpg",
         "website_url": "https://www.yelp.com/biz/heights-of-jupiter-jupiter",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "6342 Ungerer St Jupiter, FL 33458": {
         "title": "Who-Ville Experience Jupiter",
         "description": "Who-ville Experience is a unique entertainment destination in Jupiter, FL that offers immersive and interactive experiences for visitors of all ages. With a focus on creativity and imagination, Who-ville Experience provides a whimsical environment where guests can explore, play, and make memories together.",
         "image_url": "./static/images/whovillerJup.jpg",
         "website_url": "https://www.yelp.com/biz/who-ville-experience-jupiter",
-        "confirmed_2025": true
+        "confirmed_2025": true,
+        "confirmed_2024": true
     },
     "110 Segovia Ave, royal palm beach, FL": {
         "title": "Lights on Segovia Ave",
         "description": "Runs 6-9 every night until new years ",
         "image_url": "./static/images/segovia.jpg",
         "website_url": "https://www.facebook.com/share/AM5VQqWBMpLj4ok4/?mibextid=wwXIfr",
-        "confirmed_2025": false
+        "confirmed_2025": false,
+        "confirmed_2024": true
+    },
+    "13421 79th Ct N, West Palm Bch, FL, 33412": {
+        "title": "Santas mailbox to drop off letters also",
+        "description": "Santas mailbox to drop off letters also",
+        "image_url": "",
+        "website_url": "",
+        "confirmed_2025": true,
+        "confirmed_2024": false
+    },
+    "17774 Hamlin Blvd, Loxahatchee, FL, 33470": {
+        "title": "17774 Hamlin Blvd",
+        "description": "",
+        "image_url": "./static/images/17774hamlin.jpg",
+        "website_url": "",
+        "confirmed_2025": true,
+        "confirmed_2024": false
     }
 }
